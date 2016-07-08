@@ -1,0 +1,66 @@
+StringTokenizer tokenTipo = new StringTokenizer(line.replaceAll("AsignacionVariable ","")," ");
+                        String variable = tokenTipo.nextToken();
+                        tokenTipo.nextToken();
+                        String valor1 = tokenTipo.nextToken();
+                        if(variablesInt.containsKey(variable))
+                        {
+                            if(!variablesInt.containsKey(valor1))
+                            {
+                                JOptionPane.showMessageDialog(this, valor1+" no existe.", "Variable no existe.", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            String operador=tokenTipo.nextToken();
+                            if(!operador.equals(";"))
+                            {
+                                String valor2 = tokenTipo.nextToken();
+                                if(!variablesInt.containsKey(valor2))
+                                {
+                                    JOptionPane.showMessageDialog(this, valor2+" no existe.", "Variable no existe.", JOptionPane.ERROR_MESSAGE);
+                                    return;
+                                }
+                                variablesInt.put(variable, new Integer((Integer)variablesInt.get(valor1))+(Integer)variablesInt.get(valor2));
+                            }
+                            else
+                                variablesInt.put(variable, new Integer((Integer)variablesInt.get(valor1)));
+                        }
+                        else if(variablesBool.containsKey(variable))
+                        {
+                            if(!variablesBool.containsKey(valor1))
+                            {
+                                JOptionPane.showMessageDialog(this, valor1+" no existe.", "Variable no existe.", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            variablesBool.put(variable, new Boolean((Boolean)variablesBool.get(valor1)));
+                        }
+                        else if(variablesString.containsKey(variable))
+                        {
+                            if(!variablesString.containsKey(valor1))
+                            {
+                                JOptionPane.showMessageDialog(this, valor1+" no existe.", "Variable no existe.", JOptionPane.ERROR_MESSAGE);
+                                return;
+                            }
+                            String operador=tokenTipo.nextToken();
+                            if(!operador.equals(";"))
+                            {
+                                String valor2 = tokenTipo.nextToken();
+                                if(!variablesString.containsKey(valor2))
+                                {
+                                    JOptionPane.showMessageDialog(this, valor2+" no existe.", "Variable no existe.", JOptionPane.ERROR_MESSAGE);
+                                    return;
+                                }
+                                String resultado="";
+                                String cad3=variablesString.get(valor1).toString();
+                                for(int i=0;i<cad3.length()-1;i++)
+                                    resultado += ""+cad3.charAt(i);
+                                resultado += " ";
+                                cad3 = (String)variablesString.get(valor2).toString();
+                                for(int i=1;i<cad3.length()-1;i++)
+                                    resultado += ""+cad3.charAt(i);
+                                resultado += "\"";
+                                variablesString.put(variable, new String(resultado));
+                            }
+                            else
+                                variablesString.put(variable, new String((String)variablesString.get(valor1)));
+                        }
+                        else
+                            JOptionPane.showMessageDialog(this, variable+" no existe.", "Variable no existe.", JOptionPane.ERROR_MESSAGE);

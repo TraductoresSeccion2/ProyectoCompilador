@@ -1,0 +1,18 @@
+//                        StringTokenizer tokenTipo = new StringTokenizer(line.replaceAll("Declaracion ","")," ");
+//                        String tipo = tokenTipo.nextToken();
+//                        String variable = tokenTipo.nextToken();
+//                        if(tipo.equals("int"))
+//                        {
+//                            if(!variablesInt.containsKey(variable))
+//                                variablesInt.put(variable, 0);
+//                        }
+//                        if(tipo.equals("bool"))
+//                        {
+//                            if(!variablesBool.containsKey(variable))
+//                                variablesBool.put(variable, false);
+//                        }
+//                        if(tipo.equals("string"))
+//                        {
+//                            if(!variablesString.containsKey(variable))
+//                                variablesString.put(variable, "");
+//                        }

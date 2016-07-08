@@ -1,0 +1,88 @@
+StringTokenizer tokenTipo = new StringTokenizer(line.replaceAll("AsignacionSimple ","")," ");
+String variable = tokenTipo.nextToken();
+tokenTipo.nextToken();
+
+String valor1 = tokenTipo.nextToken();
+if(variablesInt.containsKey(variable))
+{
+if(!valor1.matches("\\d+"))
+{
+    JOptionPane.showMessageDialog(this, valor1+" debe ser int.");
+    return;
+}
+int val1 = Integer.parseInt(valor1);
+String operador=tokenTipo.nextToken();
+int val2=0;
+if(!operador.equals(";"))
+{
+    String valor2 = tokenTipo.nextToken();
+    if(!valor2.matches("\\d+"))
+    {
+        JOptionPane.showMessageDialog(this, valor2+" debe ser int.");
+        return;
+    }
+    val2 = Integer.parseInt(valor2);
+    variablesInt.put(variable, new Integer(Operacion(val1, val2, operador.charAt(0))));
+}
+else
+    variablesInt.put(variable, new Integer(val1));
+}
+else if(variablesBool.containsKey(variable))
+{
+if(!valor1.matches("(true|false)"))
+{
+    JOptionPane.showMessageDialog(this, valor1+" debe ser bool.");
+        return;
+}
+variablesBool.put(variable, new Boolean(valor1));
+}
+else if(variablesString.containsKey(variable))
+{
+StringTokenizer tokenString;
+String operador="";
+valor1 = "";
+if(line.contains("+"))
+{
+    tokenString = new StringTokenizer(line.replaceAll("AsignacionSimple "+variable+" = ", ""), "+");
+    String cad5 = tokenString.nextToken();
+    for(int i=0;i<cad5.length()-1;i++)
+        valor1 += ""+cad5.charAt(i);
+    operador="+";
+}
+else
+{
+    tokenString = new StringTokenizer(line.replaceAll("AsignacionSimple "+variable+" = ", ""), ";");
+    String cad5 = tokenString.nextToken();
+    for(int i=0;i<cad5.length()-1;i++)
+        valor1 += ""+cad5.charAt(i);
+    operador=";";
+}
+
+if(!valor1.matches("\"(\\w*\\s*)+\""))
+{
+    JOptionPane.showMessageDialog(this, valor1+" debe ser string.");
+        return;
+}
+
+if(operador.equals(";"))
+    variablesString.put(variable,new String(valor1));
+else
+{
+    String cad2 = tokenString.nextToken(";").replace("+ ", "");
+    String cad3 = valor1;
+    valor1="";
+    for(int i=0;i<cad3.length()-1;i++)
+        valor1 += ""+cad3.charAt(i);
+    for(int i=1;i<cad2.length()-1;i++)
+        valor1 += ""+cad2.charAt(i);
+
+    if(!valor1.matches("\"(\\w*\\s*)*\""))
+    {
+        JOptionPane.showMessageDialog(this, cad2+" debe ser string.");
+            return;
+    }
+    variablesString.put(variable,new String(valor1));
+}
+}
+else
+JOptionPane.showMessageDialog(this, variable+" no ha sido declarada.");

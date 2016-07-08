@@ -1,0 +1,14 @@
+Declaracion:
+"Declaracion (int|string|bool) [a-zA-Z]\\w* ;"
+Declaracion tipo nombreVariable ;
+Declaracion int variable1 ;
+
+AsignacionSimple:
+"AsignacionSimple [a-zA-Z]\\w* = (\\d+|\\d+ (\\+|-|\\*|/) \\d+|\"(\\w*\\s*)+\"|\"(\\w*\\s*)+\" \\+ \"(\\w*\\s*)+\"|true|false) ;"
+AsignacionSimple variable1 = 555 ;
+AsignacionSimple variable1 = 555 + 555 ;
+
+AsignacionVariable:
+"AsignacionVariable [a-zA-Z]\\w* = (([a-zA-Z]\\w*)|([a-zA-Z]\\w* (\\+|-|\\*|/) [a-zA-Z]\\w*)) ;"
+AsignacionVariable variable1 = variable2 ;
+AsignacionVariable variable1 = variable2 + variable3 ;
